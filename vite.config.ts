@@ -3,6 +3,7 @@ import fs from 'fs'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import alias from '@rollup/plugin-alias'
+import commonjs from '@rollup/plugin-commonjs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import AutoImport from 'unplugin-auto-import/vite'
 import tailwind from 'tailwindcss'
@@ -18,6 +19,7 @@ import { getPort } from './config/utils/PortHandler'
 
 const resolve = resolveTsconfigPathsToAlias()
 const PUPPETEER_SSR_PORT = getPort('PUPPETEER_SSR_PORT') || 8080
+const BUILD_FORMAT = process.env.BUILD_FORMAT || 'esm'
 
 // https://vitejs.dev/config/
 export default defineConfig(async ({ mode }) => {
@@ -113,7 +115,9 @@ export default defineConfig(async ({ mode }) => {
 		build: {
 			assetsDir: '',
 			rollupOptions: {
+				plugins: [...(BUILD_FORMAT === 'cjs' ? [commonjs()] : [])],
 				output: {
+					format: BUILD_FORMAT,
 					chunkFileNames() {
 						return '[name].[hash].js'
 					},
