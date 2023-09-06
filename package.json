@@ -23,6 +23,9 @@
 		"prepare": "git config core.autocrlf false && npx husky install",
 		"preinstall": "node server/src/utils/GenerateServerInfo.js && node server/src/puppeteer-ssr/utils/CreatePuppeteerConfigFile.js"
 	},
+	"engines": {
+		"node": "18.x"
+	},
 	"workspaces": [
 		"server",
 		"server/src/puppeteer-ssr",
