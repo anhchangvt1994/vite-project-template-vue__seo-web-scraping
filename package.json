@@ -5,8 +5,8 @@
 	"scripts": {
 		"start": "cross-env ENV=production MAX_WORKERS=2 CLUSTER_INSTANCES=1 npm run pm2-puppeteer-ssr",
 		"dev": "cross-env ENV=development npm run start-dev",
-		"build": "npx vue-tsc && cross-env ENV=production cross-env MODE=production vite build",
-		"build:esm": "npx vue-tsc && cross-env ESM=true cross-env ENV=production cross-env MODE=production vite build",
+		"build": "npx vue-tsc && vite build",
+		"build:esm": "npx vue-tsc && cross-env ESM=true vite build",
 		"preview": "npm run start-preview",
 		"start-dev": "cross-env MAX_WORKERS=4 node -r sucrase/register server/src/index.ts & vite",
 		"start-preview": "cross-env ENV=production CLUSTER_INSTANCES=2 MAX_WORKERS=7 npm run pm2-puppeteer-ssr & vite preview",
