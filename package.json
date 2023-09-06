@@ -28,7 +28,7 @@
 		"server/src/puppeteer-ssr",
 		"config/commit-packages",
 		"config/lint-and-format-packages",
-		"config/vite-packages",
+		"config/vercel-ignore-packages",
 		"config/build-tool-packages"
 	],
 	"dependencies": {
