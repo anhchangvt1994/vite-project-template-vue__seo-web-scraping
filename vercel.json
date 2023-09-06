@@ -14,10 +14,6 @@
 			"use": "@vercel/node"
 		},
 		{
-			"src": "config/build-tool-packages/package.json",
-			"use": "@vercel/node"
-		},
-		{
 			"src": "server/src/puppeteer-ssr/utils/GenerateExecutablePath.js",
 			"use": "@vercel/node"
 		},
