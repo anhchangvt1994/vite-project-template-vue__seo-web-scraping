@@ -110,10 +110,3 @@ Some environment variables are used for definition during the declaration proces
 - **ENV** If you want to test the project, please define ENV as "staging". Conversely, ENV will automatically understand that the environment is "production".
 
 ![alt text](/src/assets/static/images/readme/deploy-vercel.jpg 'Title')
-
-**More information**
-You can refer to the demos from the following links, remember to enable Lighthouse test feature to see how the content is optimized.
-**Note :** that as mentioned above, both of the following test servers are free versions and have minimal resource limitations to run the project, so the quality of scraping and optimization will be significantly reduced compared to a standard paid server.
-
-Vercel
-https://vite-project-template-vue-seo-web-scraping.vercel.app/
