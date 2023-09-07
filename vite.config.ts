@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import tailwind from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import EnvironmentPlugin from 'vite-plugin-environment'
+import { getBabelOutputPlugin } from '@rollup/plugin-babel'
 
 import {
 	ENV_OBJECT_DEFAULT,
@@ -118,6 +119,22 @@ export default defineConfig(async ({ mode }) => {
 						return '[name].[hash].js'
 					},
 				},
+				plugins: [
+					getBabelOutputPlugin({
+						allowAllFormats: true,
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									targets: '> 0.25%, not dead, IE 11',
+									useBuiltIns: false, // Default：false
+									// https://babeljs.io/docs/en/babel-preset-env#modules
+									modules: false,
+								},
+							],
+						],
+					}),
+				],
 			},
 			minify: 'terser',
 			terserOptions: {
@@ -134,7 +151,7 @@ export default defineConfig(async ({ mode }) => {
 				'/': {
 					target: `http://localhost:${PUPPETEER_SSR_PORT}`,
 					bypass(req) {
-						if (mode !== 'development') {
+						if (mode === 'development') {
 							if (
 								/^(?!.*(text\/html|application\/json))/.test(
 									req.headers['accept'] as string
@@ -142,7 +159,7 @@ export default defineConfig(async ({ mode }) => {
 							)
 								return req.url
 							else if (/text\/html/.test(req.headers['accept'] as string))
-								req.headers['staticHtmlPath'] = path.resolve(
+								req.headers['static_html_path'] = path.resolve(
 									__dirname,
 									'./index.html'
 								)

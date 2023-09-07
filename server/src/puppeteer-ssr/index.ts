@@ -200,7 +200,7 @@ const puppeteerSSRService = (async () => {
 				})
 				.status(200)
 				.sendFile(
-					(req.headers.staticHtmlPath as string) ||
+					(req.headers['static_html_path'] as string) ||
 						path.resolve(__dirname, '../../../dist/index.html')
 				) // Serve prerendered page as response.
 		})
