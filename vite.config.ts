@@ -8,9 +8,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import tailwind from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import EnvironmentPlugin from 'vite-plugin-environment'
-import commonjs from '@rollup/plugin-commonjs'
-import { getBabelOutputPlugin } from '@rollup/plugin-babel'
-import legacy from '@vitejs/plugin-legacy'
 
 import {
 	ENV_OBJECT_DEFAULT,
@@ -39,9 +36,6 @@ export default defineConfig(async ({ mode }) => {
 	return {
 		publicDir: 'src/assets/static',
 		plugins: [
-			legacy({
-				targets: ['defaults'],
-			}),
 			vue({
 				template: {
 					// NOTE - Tell vue template does not apply assets url handler for <img src="..." />, use publicDir instead
@@ -124,23 +118,6 @@ export default defineConfig(async ({ mode }) => {
 						return '[name].[hash].js'
 					},
 				},
-				// plugins: [
-				// 	getBabelOutputPlugin({
-				// 		allowAllFormats: true,
-				// 		presets: [
-				// 			[
-				// 				'@babel/preset-env',
-				// 				{
-				// 					targets: '> 0.25%, IE 11',
-				// 					useBuiltIns: false, // Default：false
-				// 					// https://babeljs.io/docs/en/babel-preset-env#modules
-				// 					modules: false,
-				// 				},
-				// 			],
-				// 		],
-				// 	}),
-				// 	commonjs(),
-				// ],
 			},
 			minify: 'terser',
 			terserOptions: {
@@ -153,26 +130,28 @@ export default defineConfig(async ({ mode }) => {
 			},
 		},
 		server: {
-			proxy: {
-				'/': {
-					target: `http://localhost:${PUPPETEER_SSR_PORT}`,
-					bypass(req) {
-						if (mode === 'development') {
-							if (
-								/^(?!.*(text\/html|application\/json))/.test(
-									req.headers['accept'] as string
-								)
-							)
-								return req.url
-							else if (/text\/html/.test(req.headers['accept'] as string))
-								req.headers['static_html_path'] = path.resolve(
-									__dirname,
-									'./index.html'
-								)
-						}
-					},
-				},
-			},
+			...(mode === 'production'
+				? {
+						proxy: {
+							'/': {
+								target: `http://localhost:${PUPPETEER_SSR_PORT}`,
+								// bypass(req) {
+								// 	if (
+								// 		/^(?!.*(text\/html|application\/json))/.test(
+								// 			req.headers['accept'] as string
+								// 		)
+								// 	)
+								// 		return req.url
+								// 	else if (/text\/html/.test(req.headers['accept'] as string))
+								// 		req.headers['static_html_path'] = path.resolve(
+								// 			__dirname,
+								// 			'./index.html'
+								// 		)
+								// },
+							},
+						},
+				  }
+				: {}),
 		},
 	}
 })
