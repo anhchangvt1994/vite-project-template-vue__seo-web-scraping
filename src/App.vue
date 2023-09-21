@@ -1,5 +1,12 @@
 <script setup>
 	import Header from 'components/Header.vue'
+	if (BotInfo.isBot) {
+		setMetaViewportTag('width=device-width, initial-scale=1')
+	} else {
+		setMetaViewportTag(
+			'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+		)
+	}
 </script>
 
 <template>
@@ -29,3 +36,4 @@
 		margin: 0 auto;
 	}
 </style>
+utils/SeoManager

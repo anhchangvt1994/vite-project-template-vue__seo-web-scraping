@@ -30,18 +30,16 @@
 	"engines": {
 		"node": "18.x"
 	},
-	"workspaces": [
-		"server",
-		"server/src/puppeteer-ssr",
-		"config/commit-packages",
-		"config/lint-and-format-packages",
-		"config/vercel-ignore-packages",
-		"config/build-tool-packages"
-	],
 	"dependencies": {
 		"lodash": "^4.17.21",
 		"vue": "^3.3.4",
 		"vue-router": "^4.2.2"
+	},
+	"devDependencies": {
+		"server": "file:./server",
+		"commit-packages": "file:./config/commit-packages",
+		"lint-and-format-packages": "file:./config/lint-and-format-packages",
+		"build-tool-packages": "file:./config/build-tool-packages"
 	},
 	"eslintConfig": {
 		"extends": [
