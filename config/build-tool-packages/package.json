@@ -9,7 +9,7 @@
 	"overrides": {
 		"isomorphic-fetch@*": "$isomorphic-fetch"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"@rollup/plugin-alias": "^5.0.0",
 		"@rollup/plugin-node-resolve": "^15.1.0",
 		"@types/node": "^20.3.3",
