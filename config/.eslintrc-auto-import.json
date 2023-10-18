@@ -106,6 +106,12 @@
     "useSlug": true,
     "useSlugWithoutDash": true,
     "useTitleCase": true,
-    "useUnsignedLetters": true
+    "useUnsignedLetters": true,
+    "ExtractDefaultPropTypes": true,
+    "ExtractPropTypes": true,
+    "ExtractPublicPropTypes": true,
+    "LocaleInfo": true,
+    "LocaleState": true,
+    "getLocale": true
   }
 }

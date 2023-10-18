@@ -75,6 +75,7 @@ export default defineConfig(async ({ mode }) => {
 							'getCustomSlug',
 							'generateTitleCase',
 							'generateSentenceCase',
+							'getLocale',
 						],
 						'composable/useStringHelper.ts': [
 							'useSlug',
@@ -113,7 +114,8 @@ export default defineConfig(async ({ mode }) => {
 							'setMetaTwitterCardTag',
 							'setSeoTag',
 						],
-						'store/ServerStore.ts': ['BotInfo', 'DeviceInfo'],
+						'store/ServerStore.ts': ['BotInfo', 'DeviceInfo', 'LocaleInfo'],
+						'store/LocaleStore.ts': ['LocaleState'],
 						'utils/CookieHelper.ts': ['getCookie', 'setCookie'],
 					},
 				],
@@ -178,28 +180,24 @@ export default defineConfig(async ({ mode }) => {
 			},
 		},
 		server: {
-			...(mode === 'production'
-				? {
-						proxy: {
-							'/': {
-								target: `http://localhost:${PUPPETEER_SSR_PORT}`,
-								// bypass(req) {
-								// 	if (
-								// 		/^(?!.*(text\/html|application\/json))/.test(
-								// 			req.headers['accept'] as string
-								// 		)
-								// 	)
-								// 		return req.url
-								// 	else if (/text\/html/.test(req.headers['accept'] as string))
-								// 		req.headers['static_html_path'] = path.resolve(
-								// 			__dirname,
-								// 			'./index.html'
-								// 		)
-								// },
-							},
-						},
-				  }
-				: {}),
+			proxy: {
+				'/': {
+					target: `http://localhost:${PUPPETEER_SSR_PORT}`,
+					bypass(req) {
+						if (
+							/text\/html|application\/json/.test(
+								req.headers['accept'] as string
+							)
+						) {
+							req.headers['static-html-path'] = path.resolve(
+								__dirname,
+								'./index.html'
+							)
+						} else if (!/.js.map|favicon.ico/g.test(req.url as string))
+							return req.url
+					},
+				},
+			},
 		},
 	}
 })

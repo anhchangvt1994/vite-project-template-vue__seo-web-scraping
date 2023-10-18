@@ -8,6 +8,8 @@ declare global {
   const BotInfo: typeof import('store/ServerStore')['BotInfo']
   const DeviceInfo: typeof import('store/ServerStore')['DeviceInfo']
   const EffectScope: typeof import('vue')['EffectScope']
+  const LocaleInfo: typeof import('store/ServerStore')['LocaleInfo']
+  const LocaleState: typeof import('store/LocaleStore')['LocaleState']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const createRouter: typeof import('vue-router')['createRouter']
@@ -22,6 +24,7 @@ declare global {
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getCustomSlug: typeof import('utils/StringHelper')['getCustomSlug']
+  const getLocale: typeof import('utils/StringHelper')['getLocale']
   const getSlug: typeof import('utils/StringHelper')['getSlug']
   const getSlugWithoutDash: typeof import('utils/StringHelper')['getSlugWithoutDash']
   const getUnsignedLetters: typeof import('utils/StringHelper')['getUnsignedLetters']
@@ -108,7 +111,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, ComponentPublicInstance, ComputedRef, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
+  export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
 }
 // for vue template auto import
 import { UnwrapRef } from 'vue'
@@ -117,6 +120,8 @@ declare module 'vue' {
     readonly BotInfo: UnwrapRef<typeof import('store/ServerStore.ts')['BotInfo']>
     readonly DeviceInfo: UnwrapRef<typeof import('store/ServerStore.ts')['DeviceInfo']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly LocaleInfo: UnwrapRef<typeof import('store/ServerStore.ts')['LocaleInfo']>
+    readonly LocaleState: UnwrapRef<typeof import('store/LocaleStore.ts')['LocaleState']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>
@@ -131,6 +136,7 @@ declare module 'vue' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCustomSlug: UnwrapRef<typeof import('utils/StringHelper.ts')['getCustomSlug']>
+    readonly getLocale: UnwrapRef<typeof import('utils/StringHelper.ts')['getLocale']>
     readonly getSlug: UnwrapRef<typeof import('utils/StringHelper.ts')['getSlug']>
     readonly getSlugWithoutDash: UnwrapRef<typeof import('utils/StringHelper.ts')['getSlugWithoutDash']>
     readonly getUnsignedLetters: UnwrapRef<typeof import('utils/StringHelper.ts')['getUnsignedLetters']>
@@ -220,6 +226,8 @@ declare module '@vue/runtime-core' {
     readonly BotInfo: UnwrapRef<typeof import('store/ServerStore.ts')['BotInfo']>
     readonly DeviceInfo: UnwrapRef<typeof import('store/ServerStore.ts')['DeviceInfo']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly LocaleInfo: UnwrapRef<typeof import('store/ServerStore.ts')['LocaleInfo']>
+    readonly LocaleState: UnwrapRef<typeof import('store/LocaleStore.ts')['LocaleState']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>
@@ -234,6 +242,7 @@ declare module '@vue/runtime-core' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCustomSlug: UnwrapRef<typeof import('utils/StringHelper.ts')['getCustomSlug']>
+    readonly getLocale: UnwrapRef<typeof import('utils/StringHelper.ts')['getLocale']>
     readonly getSlug: UnwrapRef<typeof import('utils/StringHelper.ts')['getSlug']>
     readonly getSlugWithoutDash: UnwrapRef<typeof import('utils/StringHelper.ts')['getSlugWithoutDash']>
     readonly getUnsignedLetters: UnwrapRef<typeof import('utils/StringHelper.ts')['getUnsignedLetters']>

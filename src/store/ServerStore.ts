@@ -1,3 +1,5 @@
+import { setLocaleState } from './LocaleStore'
+
 export interface IBotInfo {
 	isBot: boolean
 	name: string
@@ -9,9 +11,31 @@ export interface IDeviceInfo {
 	os: string
 }
 
+export interface ILocaleInfo {
+	lang: string
+	country: string
+	clientLang: string
+	clientCountry: string
+	defaultLang: string
+	defaultCountry: string
+	langSelected: string
+	countrySelected: string
+	hideDefaultLocale: boolean
+	range: [number, number]
+	region: string
+	eu: string
+	timezone: string
+	city: string
+	ll: [number, number]
+	metro: number
+	area: number
+}
+
 export let BotInfo: IBotInfo
 
 export let DeviceInfo: IDeviceInfo
+
+export let LocaleInfo: ILocaleInfo
 
 export const ServerStore = {
 	init() {
@@ -27,5 +51,34 @@ export const ServerStore = {
 
 				return strInfo ? JSON.parse(strInfo) : {}
 			})()
+		if (!LocaleInfo)
+			LocaleInfo = (() => {
+				const strInfo = getCookie('LocaleInfo')
+
+				const info = strInfo ? JSON.parse(strInfo) : {}
+
+				setLocaleState({
+					lang: info.langSelected,
+					country: info.countrySelected,
+				})
+
+				return info
+			})()
+	},
+	reInit: {
+		LocaleInfo: () => {
+			LocaleInfo = (() => {
+				const strInfo = getCookie('LocaleInfo')
+
+				const info = strInfo ? JSON.parse(strInfo) : {}
+
+				setLocaleState({
+					lang: info.langSelected,
+					country: info.countrySelected,
+				})
+
+				return info
+			})()
+		},
 	},
 }

@@ -1,7 +1,8 @@
-import type { Router, RouteLocationNormalized } from 'vue-router'
 import type { IUserInfo } from 'store/UserStore'
 import { UserInfoState } from 'store/UserStore'
 import { resetSeoTag } from 'utils/SeoHelper'
+import type { RouteLocationNormalized, Router } from 'vue-router'
+import LocaleHandler from './LocaleHandler'
 
 interface INavigate {
 	error?: string
@@ -20,22 +21,81 @@ export interface ICertInfo {
 	successPath: string
 }
 
+const fetchOnRoute = (() => {
+	let controller
+
+	return async (
+		to: RouteLocationNormalized,
+		init?: RequestInit | undefined
+	): Promise<undefined | { statusCode: number; redirectUrl?: string }> => {
+		if (!to) return
+
+		controller?.abort('reject')
+		controller = new AbortController()
+
+		const data = await new Promise(async (res) => {
+			setTimeout(res, 1000)
+			const response = await fetch(to.path, {
+				...init,
+				signal: controller.signal,
+			}).then((res) => res.text())
+
+			res(/^{(.|[\r\n])*?}$/.test(response) ? JSON.parse(response) : {})
+		})
+
+		return data as { statusCode: number; redirectUrl?: string }
+	}
+})() // fetchOnRoute
+
+const VALID_CODE_LIST = [200]
+const REDIRECT_CODE_LIST = [301, 302]
+const ERROR_CODE_LIST = [404, 500, 502, 504]
+
 const BeforeEach = (function beforeEach() {
 	let successPath: string
 	let successID: string
 	let WAITING_VERIFY_ROUTER_NAME_LIST: { [key: string]: Array<string> }
 
 	const _init = (router: Router) => {
-		router.beforeEach((to, from) => {
-			if (from && from.path !== to.path) {
-				fetch(to.path, {
+		router.beforeEach(async (to, from) => {
+			const enableLocale =
+				to.params.locale !== undefined &&
+				(LocaleInfo.langSelected || LocaleInfo.countrySelected)
+
+			if (enableLocale) {
+				const isSuccess = await LocaleHandler(router, to, from)
+
+				if (!isSuccess) return false
+			} else if (window.location.pathname !== to.path) {
+				// NOTE - Handle pre-render for bot with locale options turned off
+				const data = await fetchOnRoute(to, {
+					method: 'GET',
 					headers: new Headers({
-						Accept:
-							'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+						Accept: 'application/json',
 					}),
 				})
-				resetSeoTag()
+
+				if (data) {
+					if (REDIRECT_CODE_LIST.includes(data.statusCode)) {
+						router.push({
+							path: data.redirectUrl,
+							replace: true,
+						})
+
+						return false
+					} else if (ERROR_CODE_LIST.includes(data.statusCode)) return false
+				}
 			}
+
+			to.meta.lang = LocaleInfo.langSelected
+			to.meta.country = LocaleInfo.countrySelected
+
+			const curLocale = getLocale(
+				LocaleInfo.langSelected,
+				LocaleInfo.countrySelected
+			)
+
+			resetSeoTag()
 
 			if (typeof to.meta.protect === 'function') {
 				const protect = to.meta.protect
@@ -76,6 +136,9 @@ const BeforeEach = (function beforeEach() {
 						} else {
 							router.push({
 								path: navigate.redirect as string,
+								params: {
+									locale: curLocale,
+								},
 								replace: navigate.status === 301,
 							})
 						}
