@@ -57,7 +57,16 @@ bun install
 ### Table of benefit information that you must know
 
 - [What is Vue Web Scraping for SEO ?](#what)
-- [More information](#more)
+- [Why use this project ?](#why-use-it)
+- [Benefits](#benefits)
+  - [How to setup meta SEO tags ?](#meta-seo-tags)
+  - [How to setup link SEO tags ?](#link-seo-tags)
+  - [How to config redirect ?](#redirect)
+  - [How to config server ?](#server-config)
+  - [What is BotInfo variable ?](#bot-info)
+  - [What is DeviceInfo variable ?](#device-info)
+  - [What is LocaleInfo variable ?](#locale-info)
+  - [Integrate Fastify option to improve benchmark](#integrate-fastify)
 - [Deploy guide information](#deploy)
 
 <h3 id="what">What is Vue Web Scraping for SEO ?</h3>
@@ -71,9 +80,7 @@ Web Scraping for SEO project (Vue WSC-SEO) is a product designed for VueJS devel
 
 ![alt text](/src/assets/static/images/readme/tiki-lighthouse.jpg 'Title')
 
-<h3 id="more">More information</h3>
-
-**> Why use this project ?**
+<h3 id="why-use-it">Why use this project ?</h3>
 
 <p>As introduced above, Vue WSC-SEO provides VueJS developers with an additional option for easy access and SEO optimization if needed. To provide developers with more information about the product and make a more informed decision about its use, Vue WSC-SEO will provide the following specific advantages and disadvantages:</p>
 
@@ -87,7 +94,9 @@ Disadvantages:
 
 - Cannot deliver complete results on free serverless platforms (such as Vercel), because free serverless platforms often have lower bandwidth, serverless timeout, and storage capacity than paid versions. Therefore, Web Scraping features (a key feature of this product) cannot run at their best capacity when deployed on production.
 
-**> How to setup meta SEO tags ?**
+<h3 id="benefits">Benefits</h3>
+
+#### <p id="meta-seo-tags">How to setup meta SEO tags ?</p>
 
 I already created utils for this necessary, you just type **setSeoTag** for all setup or **setMeta[X]** for each meta seo tag
 
@@ -114,7 +123,7 @@ setMetaRobotsTag('index, follow')
 setMetaDescriptionTag('Home page Vue 3.x and WSC-SEO')
 ```
 
-**> How to setup link SEO tags ?**
+#### <p id="link-seo-tags">How to setup link SEO tags ?</p>
 
 I already created utils for this necessary, you just type **setSeoTag** for all setup or **setLink[X]** for each meta seo tag
 
@@ -139,7 +148,7 @@ setSeoTag({
 setLinkTwitterTitleTag('Home page')
 ```
 
-**> How to setup redirect ?**
+#### <p id="redirect">How to setup redirect ?</p>
 
 I already prepared a configuration file to support for redirect case, this configuration file placed in **./server/src/app/redirect.config.ts**
 
@@ -158,7 +167,7 @@ export interface IRedirectInfoItem {
 
 // NOTE - Declare redirects
 export const REDIRECT_INFO: IRedirectInfoItem[] = [
-  // NOTE - redirect from pathname /test to pathname / with status code 302
+	// NOTE - redirect from pathname /test to pathname / with status code 302
   {
     path: '/test',
     targetPath: '/',
@@ -169,18 +178,67 @@ export const REDIRECT_INFO: IRedirectInfoItem[] = [
 
 2. Dynamic configuration
 
-Use it when you need handle more logics before redirect. (Coming soon feature)
+Use it when you need handle more logics before redirect.
 
 ```typescript
 import { Request } from 'express'
 
 // NOTE - Declare redirect middleware
-export const REDIRECT_INJECTION = (req: Request) => {} // REDIRECT_INJECTION
+export const REDIRECT_INJECTION = (redirectUrl, req, res): IRedirectResult => {
+  let statusCode = 200
+
+  const pathSplitted = redirectUrl.split('/')
+
+  if (pathSplitted.length === 2 && /(0|1|2)$/.test(redirectUrl)) {
+    statusCode = 302
+    redirectUrl = redirectUrl.replace(/(0|1|2)$/, '3')
+  }
+
+  const localeCodeValidationResult = ValidateLocaleCode(redirectUrl, res)
+
+  if (localeCodeValidationResult.statusCode !== 200) {
+    // NOTE - 301 is the priority status code
+    /*
+    * We just need redirect one time for all case
+    * "one redirect for all redirect case
+    * not one redirect for one case"
+    * If the prev case have 301 status -> it will be
+    * statusCode for all next case
+    */
+    statusCode = statusCode === 301 ? statusCode : localeCodeValidationResult.statusCode
+    redirectUrl = localeCodeValidationResult.redirectUrl
+  }
+
+  return {
+    statusCode,
+    redirectUrl,
+  }
+} // REDIRECT_INJECTION
 ```
 
-**> What is BotInfo variable ?**
+#### <p id="server-config">How to config server ?</p>
 
-<p><b>BotInfo</b> is a variable keep the Bot information which sent from server to client. You can use it to decide render / none render component if it is Bot / not Bot.</p>
+You can config some behavior for server to match with your necessary, to do it you just open the <b>server/server.config.ts</b> file and config into it.
+
+```typescript
+import { defineServerConfig } from './utils/ServerConfigHandler'
+
+const ServerConfig = defineServerConfig({
+  locale: {
+    enable: true, // enable use /:locale dispatcher param (default false)
+    defaultLang: 'en', // default language for website
+    defaultCountry: 'us', // default country for website (set it empty if you just use language)
+    // hideDefaultLocale: false // hide the default locale or show it such as other locales (default true)
+  },
+})
+
+export default ServerConfig
+
+```
+
+#### <p id="bot-info">What is BotInfo variable ?</p>
+
+<p><b>BotInfo</b> is a variable contains the Bot information which sent from server to client. You can use it to decide render / none render component if it is Bot / not Bot.</p>
 
 ```typescript
 interface IBotInfo {
@@ -189,9 +247,9 @@ interface IBotInfo {
 }
 ```
 
-**> What is DeviceInfo variable ?**
+#### <p id="device-info">What is DeviceInfo variable ?</p>
 
-<p><b>DeviceInfo</b> is a variable keep the Device information which sent from server to client. You can use it to create adaptive website.</p>
+<p><b>DeviceInfo</b> is a variable contains the Device information which sent from server to client. You can use it to create adaptive website.</p>
 
 ```typescript
 interface IDeviceInfo {
@@ -199,6 +257,51 @@ interface IDeviceInfo {
   isMobile: string | boolean
   os: string
 }
+```
+
+#### <p id="locale-info">What is LocaleInfo variable ?</p>
+
+<p><b>LocaleInfo</b> is a variable contains some information about the locale. You can use it for more cases need to check "Where user's request from ?", "What language in user's country or user's client use ?"</p>
+<p>The <b>/:locale</b> dispatcher param is the practice case to use LocaleInfo and I already integrate that case in this project. Enable it in <b>server/server.config.ts</b> is all you need to do to use it feature.</p>
+
+```typescript
+export interface ILocaleInfo {
+  lang: string // user's language (base on location)
+  country: string // user's country (base on location)
+  clientLang: string // browser's language (base on user's browser in use)
+  clientCountry: string // browser's country (base on user's browser in use)
+  defaultLang: string // default language of website (you define it in server.config.ts, it will be client language if empty)
+  defaultCountry: string // default country of website (you define it in server.config.ts, it will be client country if empty)
+  langSelected: string // language selected by user (it will be default language if empty)
+  countrySelected: string // country selected by user
+  hideDefaultLocale: boolean // If your default locale is /en-us and you need to hide it -> use it (default true)
+  range: [number, number]
+  region: string
+  eu: string
+  timezone: string
+  city: string
+  ll: [number, number]
+  metro: number
+  area: number
+}
+```
+
+#### <p id="integrate-fastify">Integrate Fastify option to improve the benchmark</p>
+
+<p>Inside <a href="https://expressjs.com/" target="_blank">ExpressJS</a> like the default, I also integrated <a href="https://fastify.dev/" target="_blank">FastifyJS</a> into the project to take advantage of FastifyJS's benchmark processing capability, thereby improving the performance and flexibility of the project.</p>
+<p>You can use it by using the command lines above</p>
+
+```bash
+npm run dev:fastify
+```
+```bash
+npm run preview:fastify
+```
+
+<p>And you can setup it for "start" script to deploy into your server by replace "pm2-puppeteer-ssr" to "pm2-puppeteer-ssr:fastify"</p>
+
+```json
+"start": "cross-env ENV=production MAX_WORKERS=2 CLUSTER_INSTANCES=1 npm run pm2-puppeteer-ssr:fastify",
 ```
 
 <h3 id="deploy">Deploy guide information for testing</h3>

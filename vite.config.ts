@@ -180,24 +180,35 @@ export default defineConfig(async ({ mode }) => {
 			},
 		},
 		server: {
-			proxy: {
-				'/': {
-					target: `http://localhost:${PUPPETEER_SSR_PORT}`,
-					bypass(req) {
-						if (
-							/text\/html|application\/json/.test(
-								req.headers['accept'] as string
-							)
-						) {
-							req.headers['static-html-path'] = path.resolve(
-								__dirname,
-								'./index.html'
-							)
-						} else if (!/.js.map|favicon.ico/g.test(req.url as string))
-							return req.url
-					},
-				},
-			},
+			proxy:
+				mode === 'development'
+					? {
+							'/': {
+								target: `http://localhost:${PUPPETEER_SSR_PORT}`,
+								bypass(req) {
+									if (
+										/text\/html|application\/json/.test(
+											req.headers['accept'] as string
+										)
+									) {
+										req.headers['static-html-path'] = path.resolve(
+											__dirname,
+											'./index.html'
+										)
+									} else if (!/.js.map|favicon.ico/g.test(req.url as string))
+										return req.url
+								},
+							},
+					  }
+					: {
+							'/': {
+								target: `http://localhost:${PUPPETEER_SSR_PORT}`,
+								bypass(req) {
+									if (/.js.map|favicon.ico/g.test(req.url as string))
+										return req.url
+								},
+							},
+					  },
 		},
 	}
 })
