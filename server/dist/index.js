@@ -260,21 +260,33 @@ const startServer = async () => {
 			}
 		)
 
+		if (!process.env.REFRESH_SERVER) {
+			_child_process.spawn.call(void 0, 'vite', [], {
+				stdio: 'inherit',
+				shell: true,
+			})
+		}
+
 		watcher.on('change', async (path) => {
 			_ConsoleHandler2.default.log(`File ${path} has been changed`)
 			await server.close()
-			setTimeout(() => {
-				_child_process.spawn.call(
-					void 0,
-					'node',
-					['--require', 'sucrase/register', 'server/src/index.ts'],
-					{
-						stdio: 'inherit',
-						shell: true,
-					}
-				)
-			})
+			_child_process.spawn.call(
+				void 0,
+				'node',
+				[
+					'cross-env REFRESH_SERVER=1 --require sucrase/register server/src/index.ts',
+				],
+				{
+					stdio: 'inherit',
+					shell: true,
+				}
+			)
 			process.exit(0)
+		})
+	} else {
+		_child_process.spawn.call(void 0, 'vite', ['preview'], {
+			stdio: 'inherit',
+			shell: true,
 		})
 	}
 }

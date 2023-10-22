@@ -179,20 +179,32 @@ const startServer = async () => {
 			persistent: true,
 		})
 
+		if (!process.env.REFRESH_SERVER) {
+			spawn('vite', [], {
+				stdio: 'inherit',
+				shell: true,
+			})
+		}
+
 		watcher.on('change', async (path) => {
 			Console.log(`File ${path} has been changed`)
 			await server.close()
-			setTimeout(() => {
-				spawn(
-					'node',
-					['--require', 'sucrase/register', 'server/src/index.ts'],
-					{
-						stdio: 'inherit',
-						shell: true,
-					}
-				)
-			})
+			spawn(
+				'node',
+				[
+					'cross-env REFRESH_SERVER=1 --require sucrase/register server/src/index.ts',
+				],
+				{
+					stdio: 'inherit',
+					shell: true,
+				}
+			)
 			process.exit(0)
+		})
+	} else {
+		spawn('vite', ['preview'], {
+			stdio: 'inherit',
+			shell: true,
 		})
 	}
 }
