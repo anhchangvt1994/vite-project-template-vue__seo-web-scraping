@@ -174,24 +174,23 @@ const ServerRouterHandler = (() => {
 
 				ServerStore.reInit.LocaleInfo()
 			}
-		} else if (enableLocale && validPathInfo && validPathInfo.status !== 200) {
-			// console.log('change local with cache')
-			if (
-				!to.path.startsWith(`/${curLocale}`) ||
+		} else if (
+			enableLocale &&
+			validPathInfo &&
+			validPathInfo.status !== 200 &&
+			(!to.path.startsWith(`/${curLocale}`) ||
 				to.path.replace(`/${curLocale}`, '') === '/' ||
-				(to.path.replace(`/${curLocale}`, '') || '/') !== validPathInfo.path
-			) {
-				const search = to.fullPath.split('?')[1]
+				(to.path.replace(`/${curLocale}`, '') || '/') !== validPathInfo.path)
+		) {
+			// console.log('change local with cache')
+			const search = to.fullPath.split('?')[1]
 
-				return {
-					redirectPath: `/${curLocale}${
-						validPathInfo.path === '/' ? '' : validPathInfo.path
-					}${search ? '?' + search : ''}`,
-					status: 301,
-				}
+			return {
+				redirectPath: `/${curLocale}${
+					validPathInfo.path === '/' ? '' : validPathInfo.path
+				}${search ? '?' + search : ''}`,
+				status: 301,
 			}
-
-			resetSeoTag()
 		} else {
 			resetSeoTag()
 		}
