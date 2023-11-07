@@ -99,8 +99,6 @@ Disadvantages:
 
 #### <span id="meta-seo-tags">How to setup meta SEO tags ?</span>
 
-<br/>
-
 I already created utils for this necessary, you just type **setSeoTag** for all setup or **setMeta[X]** for each meta seo tag
 
 ```typescript
@@ -128,8 +126,6 @@ setMetaDescriptionTag('Home page Vue 3.x and WSC-SEO')
 
 #### <span id="link-seo-tags">How to setup link SEO tags ?</span>
 
-<br/>
-
 I already created utils for this necessary, you just type **setSeoTag** for all setup or **setLink[X]** for each meta seo tag
 
 ```javascript
@@ -154,8 +150,6 @@ setLinkTwitterTitleTag('Home page')
 ```
 
 #### <span id="redirect">How to setup redirect ?</span>
-
-<br/>
 
 I already prepared a configuration file to support for redirect case, this configuration file placed in **./server/src/app/redirect.config.ts**
 
@@ -219,8 +213,6 @@ export const REDIRECT_INJECTION = (
 
 #### <span id="server-config">How to config server ?</span>
 
-<br/>
-
 You can config some behavior for server to match with your necessary, to do it you just open the <b>server/server.config.ts</b> file and config into it.
 
 ```typescript
@@ -240,8 +232,6 @@ export default ServerConfig
 
 #### <span id="bot-info">What is BotInfo variable ?</span>
 
-<br/>
-
 <p><b>BotInfo</b> is a variable contains the Bot information which sent from server to client. You can use it to decide render / none render component if it is Bot / not Bot.</p>
 
 ```typescript
@@ -252,8 +242,6 @@ interface IBotInfo {
 ```
 
 #### <span id="device-info">What is DeviceInfo variable ?</span>
-
-<br/>
 
 <p><b>DeviceInfo</b> is a variable contains the Device information which sent from server to client. You can use it to create adaptive website.</p>
 
@@ -266,8 +254,6 @@ interface IDeviceInfo {
 ```
 
 #### <span id="locale-info">What is LocaleInfo variable ?</span>
-
-<br/>
 
 <p><b>LocaleInfo</b> is a variable contains some information about the locale. You can use it for more cases need to check "Where user's request from ?", "What language in user's country or user's client use ?"</p>
 <p>The <b>/:locale</b> dispatcher param is the practice case to use LocaleInfo and I already integrate that case in this project. Enable it in <b>server/server.config.ts</b> is all you need to do to use it feature.</p>
@@ -300,8 +286,6 @@ Beside the `LocaleInfo` used such as a normal variable to get more information a
 
 #### <span id="integrate-fastify">Integrate Fastify option to improve the benchmark</span>
 
-<br/>
-
 <p>Inside <a href="https://expressjs.com/" target="_blank">ExpressJS</a> like the default, I also integrated <a href="https://fastify.dev/" target="_blank">FastifyJS</a> into the project to take advantage of FastifyJS's benchmark processing capability, thereby improving the performance and flexibility of the project.</p>
 <p>You can use it by using the command lines above</p>
 
@@ -320,8 +304,6 @@ npm run preview:fastify
 ```
 
 #### <span id="integrate-uws">Integrate uWebSockets option to improve the benchmark</span>
-
-<br/>
 
 <p>Inside <a href="https://expressjs.com/" target="_blank">ExpressJS</a> like the default and <a href="https://fastify.dev/" target="_blank">FastifyJS</a> like an option, I also integrated <a href="https://github.com/uNetworking/uWebSockets" target="_blank">uWebSockets</a> into the project to take advantage of uWebSockets's benchmark processing capability, thereby improving the performance and flexibility of the project.</p>
 <p>You can use it by using the command lines above</p>
