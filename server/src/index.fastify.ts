@@ -6,7 +6,7 @@ import fastify from 'fastify'
 import path from 'path'
 import serveStatic from 'serve-static'
 import { findFreePort, getPort, setPort } from '../../config/utils/PortHandler'
-import { ENV, pagesPath } from './constants'
+import { ENV, pagesPath, serverInfo } from './constants'
 import { COOKIE_EXPIRED } from './puppeteer-ssr/constants'
 import puppeteerSSRService from './puppeteer-ssr/index.fastify'
 import ServerConfig from './server.config'
@@ -40,8 +40,9 @@ const cleanResourceWithCondition = async () => {
 
 const startServer = async () => {
 	await cleanResourceWithCondition()
-	let port = getPort('PUPPETEER_SSR_PORT')
+	let port = process.env.PORT || getPort('PUPPETEER_SSR_PORT')
 	port = await findFreePort(port || process.env.PUPPETEER_SSR_PORT || 8080)
+	process.env.PORT = port
 	setPort(port, 'PUPPETEER_SSR_PORT')
 
 	const app = fastify()
@@ -216,7 +217,7 @@ const startServer = async () => {
 		// 	})
 		// 	process.exit(0)
 		// })
-	} else {
+	} else if (!serverInfo.isServer) {
 		spawn('vite', ['preview'], {
 			stdio: 'inherit',
 			shell: true,
