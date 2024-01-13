@@ -150,7 +150,7 @@ const startServer = async () => {
 		.use(function (req, res, next) {
 			let botInfo
 			if (req.headers.service === 'puppeteer') {
-				botInfo = req.headers['botInfo'] || ''
+				botInfo = req.headers['botinfo'] || req.headers['botInfo'] || ''
 			} else {
 				botInfo = JSON.stringify(_DetectBot2.default.call(void 0, req))
 			}
@@ -237,7 +237,8 @@ const startServer = async () => {
 		.use(function (req, res, next) {
 			let deviceInfo
 			if (req.headers.service === 'puppeteer') {
-				deviceInfo = req.headers['deviceInfo'] || ''
+				deviceInfo =
+					req.headers['deviceinfo'] || req.headers['deviceInfo'] || ''
 			} else {
 				deviceInfo = JSON.stringify(_DetectDevice2.default.call(void 0, req))
 			}
@@ -280,15 +281,10 @@ const startServer = async () => {
 		// })
 
 		if (!process.env.REFRESH_SERVER) {
-			_child_process.spawn.call(
-				void 0,
-				'VITE_CJS_IGNORE_WARNING=true vite',
-				[],
-				{
-					stdio: 'inherit',
-					shell: true,
-				}
-			)
+			_child_process.spawn.call(void 0, 'vite', [], {
+				stdio: 'inherit',
+				shell: true,
+			})
 		}
 
 		// watcher.on('change', async (path) => {
@@ -309,15 +305,10 @@ const startServer = async () => {
 		// 	process.exit(0)
 		// })
 	} else if (!_constants.serverInfo.isServer) {
-		_child_process.spawn.call(
-			void 0,
-			'VITE_CJS_IGNORE_WARNING=true vite',
-			['preview'],
-			{
-				stdio: 'inherit',
-				shell: true,
-			}
-		)
+		_child_process.spawn.call(void 0, 'vite', ['preview'], {
+			stdio: 'inherit',
+			shell: true,
+		})
 	}
 }
 

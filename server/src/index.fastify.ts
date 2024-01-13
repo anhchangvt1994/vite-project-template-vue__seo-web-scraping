@@ -89,7 +89,7 @@ const startServer = async () => {
 		.use(function (req, res, next) {
 			let botInfo
 			if (req.headers.service === 'puppeteer') {
-				botInfo = req.headers['botInfo'] || ''
+				botInfo = req.headers['botinfo'] || req.headers['botInfo'] || ''
 			} else {
 				botInfo = JSON.stringify(detectBot(req as any))
 			}
@@ -162,7 +162,8 @@ const startServer = async () => {
 		.use(function (req, res, next) {
 			let deviceInfo
 			if (req.headers.service === 'puppeteer') {
-				deviceInfo = req.headers['deviceInfo'] || ''
+				deviceInfo =
+					req.headers['deviceinfo'] || req.headers['deviceInfo'] || ''
 			} else {
 				deviceInfo = JSON.stringify(detectDevice(req as any))
 			}
@@ -198,7 +199,7 @@ const startServer = async () => {
 		// })
 
 		if (!process.env.REFRESH_SERVER) {
-			spawn('VITE_CJS_IGNORE_WARNING=true vite', [], {
+			spawn('vite', [], {
 				stdio: 'inherit',
 				shell: true,
 			})
@@ -222,7 +223,7 @@ const startServer = async () => {
 		// 	process.exit(0)
 		// })
 	} else if (!serverInfo.isServer) {
-		spawn('VITE_CJS_IGNORE_WARNING=true vite', ['preview'], {
+		spawn('vite', ['preview'], {
 			stdio: 'inherit',
 			shell: true,
 		})
