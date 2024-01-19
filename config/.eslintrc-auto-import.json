@@ -112,6 +112,7 @@
     "ExtractPublicPropTypes": true,
     "LocaleInfo": true,
     "LocaleState": true,
-    "getLocale": true
+    "getLocale": true,
+    "EnvironmentInfo": true
   }
 }
