@@ -121,7 +121,7 @@ export default defineConfig(async ({ mode }) => {
 							'LocaleInfo',
 						],
 						'store/LocaleStore.ts': ['LocaleState'],
-						'utils/CookieHelper.ts': ['getCookie', 'setCookie'],
+						'utils/CookieHelper.ts': ['getCookie', 'setCookie', 'deleteCookie'],
 					},
 				],
 				dts: './config/auto-imports.d.ts',

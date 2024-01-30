@@ -113,6 +113,7 @@
     "LocaleInfo": true,
     "LocaleState": true,
     "getLocale": true,
-    "EnvironmentInfo": true
+    "EnvironmentInfo": true,
+    "deleteCookie": true
   }
 }
