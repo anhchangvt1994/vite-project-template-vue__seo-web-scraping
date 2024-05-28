@@ -114,6 +114,11 @@
     "LocaleState": true,
     "getLocale": true,
     "EnvironmentInfo": true,
-    "deleteCookie": true
+    "deleteCookie": true,
+    "decode": true,
+    "encode": true,
+    "hashCode": true,
+    "getAPIStore": true,
+    "ProxyAPI": true
   }
 }

@@ -76,6 +76,9 @@ export default defineConfig(async ({ mode }) => {
 							'generateTitleCase',
 							'generateSentenceCase',
 							'getLocale',
+							'encode',
+							'decode',
+							'hashCode',
 						],
 						'composable/useStringHelper.ts': [
 							'useSlug',
@@ -121,6 +124,8 @@ export default defineConfig(async ({ mode }) => {
 							'LocaleInfo',
 						],
 						'store/LocaleStore.ts': ['LocaleState'],
+						'store/APIStore.ts': ['getAPIStore'],
+						'utils/ProxyAPIHelper/index.ts': ['ProxyAPI'],
 						'utils/CookieHelper.ts': ['getCookie', 'setCookie', 'deleteCookie'],
 					},
 				],
