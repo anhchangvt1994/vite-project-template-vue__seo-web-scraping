@@ -1,13 +1,14 @@
-import path from 'path'
-import fs from 'fs'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 import alias from '@rollup/plugin-alias'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import AutoImport from 'unplugin-auto-import/vite'
-import tailwind from 'tailwindcss'
+import vue from '@vitejs/plugin-vue'
 import autoprefixer from 'autoprefixer'
+import fs from 'fs'
+import path from 'path'
+import tailwind from 'tailwindcss'
+import AutoImport from 'unplugin-auto-import/vite'
+import { defineConfig } from 'vite'
 import EnvironmentPlugin from 'vite-plugin-environment'
+import { ENV_VARIABLE_EXPORTER_FOR_AUTO_IMPORT } from './config/env/ENV'
 
 import {
 	ENV_OBJECT_DEFAULT,
@@ -117,16 +118,17 @@ export default defineConfig(async ({ mode }) => {
 							'setMetaTwitterCardTag',
 							'setSeoTag',
 						],
-						'store/ServerStore.ts': [
+						'app/store/ServerStore.ts': [
 							'EnvironmentInfo',
 							'BotInfo',
 							'DeviceInfo',
 							'LocaleInfo',
 						],
-						'store/LocaleStore.ts': ['LocaleState'],
-						'store/APIStore.ts': ['getAPIStore'],
+						'app/store/LocaleStore.ts': ['LocaleState'],
+						'app/store/APIStore.ts': ['getAPIStore'],
 						'utils/ProxyAPIHelper/index.ts': ['ProxyAPI'],
 						'utils/CookieHelper.ts': ['getCookie', 'setCookie', 'deleteCookie'],
+						...ENV_VARIABLE_EXPORTER_FOR_AUTO_IMPORT,
 					},
 				],
 				dts: './config/auto-imports.d.ts',
