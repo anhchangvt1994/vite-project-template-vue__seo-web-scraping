@@ -146,20 +146,6 @@ declare module 'vue' {
     readonly LocaleInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['LocaleInfo']>
     readonly LocaleState: UnwrapRef<typeof import('app/store/LocaleStore.ts')['LocaleState']>
     readonly ProxyAPI: UnwrapRef<typeof import('utils/ProxyAPIHelper/index.ts')['ProxyAPI']>
-    readonly ROUTER_BASE_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_BASE_PATH']>
-    readonly ROUTER_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_COMMENT_NAME']>
-    readonly ROUTER_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_COMMENT_PATH']>
-    readonly ROUTER_CONTENT_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_COMMENT_NAME']>
-    readonly ROUTER_CONTENT_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_COMMENT_PATH']>
-    readonly ROUTER_CONTENT_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_NAME']>
-    readonly ROUTER_CONTENT_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_PATH']>
-    readonly ROUTER_HOME_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_HOME_NAME']>
-    readonly ROUTER_HOME_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_HOME_PATH']>
-    readonly ROUTER_LOGIN_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_LOGIN_NAME']>
-    readonly ROUTER_LOGIN_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_LOGIN_PATH']>
-    readonly ROUTER_NOT_FOUND_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_NOT_FOUND_NAME']>
-    readonly ROUTER_NOT_FOUND_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_NOT_FOUND_PATH']>
-    readonly TEST_TEST_TEST: UnwrapRef<typeof import('@/config/env/ENV.js')['TEST_TEST_TEST']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>
@@ -273,20 +259,6 @@ declare module '@vue/runtime-core' {
     readonly LocaleInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['LocaleInfo']>
     readonly LocaleState: UnwrapRef<typeof import('app/store/LocaleStore.ts')['LocaleState']>
     readonly ProxyAPI: UnwrapRef<typeof import('utils/ProxyAPIHelper/index.ts')['ProxyAPI']>
-    readonly ROUTER_BASE_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_BASE_PATH']>
-    readonly ROUTER_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_COMMENT_NAME']>
-    readonly ROUTER_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_COMMENT_PATH']>
-    readonly ROUTER_CONTENT_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_COMMENT_NAME']>
-    readonly ROUTER_CONTENT_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_COMMENT_PATH']>
-    readonly ROUTER_CONTENT_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_NAME']>
-    readonly ROUTER_CONTENT_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_PATH']>
-    readonly ROUTER_HOME_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_HOME_NAME']>
-    readonly ROUTER_HOME_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_HOME_PATH']>
-    readonly ROUTER_LOGIN_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_LOGIN_NAME']>
-    readonly ROUTER_LOGIN_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_LOGIN_PATH']>
-    readonly ROUTER_NOT_FOUND_NAME: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_NOT_FOUND_NAME']>
-    readonly ROUTER_NOT_FOUND_PATH: UnwrapRef<typeof import('@/config/env/ENV.js')['ROUTER_NOT_FOUND_PATH']>
-    readonly TEST_TEST_TEST: UnwrapRef<typeof import('@/config/env/ENV.js')['TEST_TEST_TEST']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>
