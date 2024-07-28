@@ -9,23 +9,24 @@ declare global {
   const DeviceInfo: typeof import('app/store/ServerStore.ts')['DeviceInfo']
   const EffectScope: typeof import('vue')['EffectScope']
   const EnvironmentInfo: typeof import('app/store/ServerStore.ts')['EnvironmentInfo']
+  const GENERAL_GREETING: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['GENERAL_GREETING']
   const LocaleInfo: typeof import('app/store/ServerStore.ts')['LocaleInfo']
   const LocaleState: typeof import('app/store/LocaleStore.ts')['LocaleState']
   const ProxyAPI: typeof import('utils/ProxyAPIHelper/index.ts')['ProxyAPI']
-  const ROUTER_BASE_PATH: typeof import('@/config/env/ENV.js')['ROUTER_BASE_PATH']
-  const ROUTER_COMMENT_NAME: typeof import('@/config/env/ENV.js')['ROUTER_COMMENT_NAME']
-  const ROUTER_COMMENT_PATH: typeof import('@/config/env/ENV.js')['ROUTER_COMMENT_PATH']
-  const ROUTER_CONTENT_COMMENT_NAME: typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_COMMENT_NAME']
-  const ROUTER_CONTENT_COMMENT_PATH: typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_COMMENT_PATH']
-  const ROUTER_CONTENT_NAME: typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_NAME']
-  const ROUTER_CONTENT_PATH: typeof import('@/config/env/ENV.js')['ROUTER_CONTENT_PATH']
-  const ROUTER_HOME_NAME: typeof import('@/config/env/ENV.js')['ROUTER_HOME_NAME']
-  const ROUTER_HOME_PATH: typeof import('@/config/env/ENV.js')['ROUTER_HOME_PATH']
-  const ROUTER_LOGIN_NAME: typeof import('@/config/env/ENV.js')['ROUTER_LOGIN_NAME']
-  const ROUTER_LOGIN_PATH: typeof import('@/config/env/ENV.js')['ROUTER_LOGIN_PATH']
-  const ROUTER_NOT_FOUND_NAME: typeof import('@/config/env/ENV.js')['ROUTER_NOT_FOUND_NAME']
-  const ROUTER_NOT_FOUND_PATH: typeof import('@/config/env/ENV.js')['ROUTER_NOT_FOUND_PATH']
-  const TEST_TEST_TEST: typeof import('@/config/env/ENV.js')['TEST_TEST_TEST']
+  const ROUTER_BASE_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_BASE_PATH']
+  const ROUTER_COMMENT_NAME: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_COMMENT_NAME']
+  const ROUTER_COMMENT_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_COMMENT_PATH']
+  const ROUTER_CONTENT_COMMENT_NAME: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_COMMENT_NAME']
+  const ROUTER_CONTENT_COMMENT_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_COMMENT_PATH']
+  const ROUTER_CONTENT_NAME: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_NAME']
+  const ROUTER_CONTENT_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_PATH']
+  const ROUTER_HOME_NAME: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_HOME_NAME']
+  const ROUTER_HOME_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_HOME_PATH']
+  const ROUTER_LOGIN_NAME: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_LOGIN_NAME']
+  const ROUTER_LOGIN_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_LOGIN_PATH']
+  const ROUTER_NOT_FOUND_NAME: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_NOT_FOUND_NAME']
+  const ROUTER_NOT_FOUND_PATH: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_NOT_FOUND_PATH']
+  const TEST_TEST_TEST: typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['TEST_TEST_TEST']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const createRouter: typeof import('vue-router')['createRouter']
@@ -143,9 +144,24 @@ declare module 'vue' {
     readonly DeviceInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['DeviceInfo']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly EnvironmentInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['EnvironmentInfo']>
+    readonly GENERAL_GREETING: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['GENERAL_GREETING']>
     readonly LocaleInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['LocaleInfo']>
     readonly LocaleState: UnwrapRef<typeof import('app/store/LocaleStore.ts')['LocaleState']>
     readonly ProxyAPI: UnwrapRef<typeof import('utils/ProxyAPIHelper/index.ts')['ProxyAPI']>
+    readonly ROUTER_BASE_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_BASE_PATH']>
+    readonly ROUTER_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_COMMENT_NAME']>
+    readonly ROUTER_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_COMMENT_PATH']>
+    readonly ROUTER_CONTENT_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_COMMENT_NAME']>
+    readonly ROUTER_CONTENT_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_COMMENT_PATH']>
+    readonly ROUTER_CONTENT_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_NAME']>
+    readonly ROUTER_CONTENT_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_PATH']>
+    readonly ROUTER_HOME_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_HOME_NAME']>
+    readonly ROUTER_HOME_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_HOME_PATH']>
+    readonly ROUTER_LOGIN_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_LOGIN_NAME']>
+    readonly ROUTER_LOGIN_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_LOGIN_PATH']>
+    readonly ROUTER_NOT_FOUND_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_NOT_FOUND_NAME']>
+    readonly ROUTER_NOT_FOUND_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_NOT_FOUND_PATH']>
+    readonly TEST_TEST_TEST: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['TEST_TEST_TEST']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>
@@ -256,9 +272,24 @@ declare module '@vue/runtime-core' {
     readonly DeviceInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['DeviceInfo']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly EnvironmentInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['EnvironmentInfo']>
+    readonly GENERAL_GREETING: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['GENERAL_GREETING']>
     readonly LocaleInfo: UnwrapRef<typeof import('app/store/ServerStore.ts')['LocaleInfo']>
     readonly LocaleState: UnwrapRef<typeof import('app/store/LocaleStore.ts')['LocaleState']>
     readonly ProxyAPI: UnwrapRef<typeof import('utils/ProxyAPIHelper/index.ts')['ProxyAPI']>
+    readonly ROUTER_BASE_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_BASE_PATH']>
+    readonly ROUTER_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_COMMENT_NAME']>
+    readonly ROUTER_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_COMMENT_PATH']>
+    readonly ROUTER_CONTENT_COMMENT_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_COMMENT_NAME']>
+    readonly ROUTER_CONTENT_COMMENT_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_COMMENT_PATH']>
+    readonly ROUTER_CONTENT_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_NAME']>
+    readonly ROUTER_CONTENT_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_CONTENT_PATH']>
+    readonly ROUTER_HOME_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_HOME_NAME']>
+    readonly ROUTER_HOME_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_HOME_PATH']>
+    readonly ROUTER_LOGIN_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_LOGIN_NAME']>
+    readonly ROUTER_LOGIN_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_LOGIN_PATH']>
+    readonly ROUTER_NOT_FOUND_NAME: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_NOT_FOUND_NAME']>
+    readonly ROUTER_NOT_FOUND_PATH: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['ROUTER_NOT_FOUND_PATH']>
+    readonly TEST_TEST_TEST: UnwrapRef<typeof import('@/config/env/ENV_AUTO_IMPORT.mjs')['TEST_TEST_TEST']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>

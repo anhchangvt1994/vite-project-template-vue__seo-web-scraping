@@ -10,6 +10,7 @@
     "ExtractDefaultPropTypes": true,
     "ExtractPropTypes": true,
     "ExtractPublicPropTypes": true,
+    "GENERAL_GREETING": true,
     "InjectionKey": true,
     "LocaleInfo": true,
     "LocaleState": true,
